@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+files:
+   - source: target
+     destination: /opt/tomcat8/webapps
+     overwrite: yes
+permissions:
+   - object: /opt/codedeploy-agent/deployment-root
+     pattern: "**"
+     owner: root
+     group: root
+     mode: 755
+     type:
+       - directory
+   - object: /opt/tomcat8/webapps
+     pattern: "**"
+     owner: root
+     group: root
+     mode: 755
+     type:
+       - directory
+hooks:
+   AfterInstall:
+    - location: scripts/restart.sh
+      runas: root
